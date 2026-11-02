@@ -9,5 +9,11 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 # -Wall -Wextra показывают все предупреждения, -g добавляет отладочную инфу для gdb
 add_compile_options(-Wall -Wextra -g)
 
+find_package(CURL REQUIRED)
+
+include_directories(include)
+
 # Создаем исполняемый файл my_trade из файла src/main.cpp
-add_executable(my_trade src/main.cpp)
+add_executable(my_trade src/main.cpp src/MoexClient.cpp)
+
+target_link_libraries(my_trade PRIVATE ${CURL_LIBRARIES})
